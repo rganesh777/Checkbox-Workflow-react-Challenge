@@ -464,12 +464,21 @@ export const NodeEditor = memo<NodeEditorProps>(
                         size="2"
                         as="div"
                         key={field}
+                        style={{
+                          padding: '4px 8px',
+                          cursor: 'pointer',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'var(--gray-4)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
                         onClick={() => {
                           handleChange('fieldToEvaluate', field);
                           setAutoCompleteOpen(false);
                           setFilterFields([]);
                         }}
-                        style={{ padding: '4px 8px', cursor: 'pointer' }}
                       >
                         {field}
                       </Text>
