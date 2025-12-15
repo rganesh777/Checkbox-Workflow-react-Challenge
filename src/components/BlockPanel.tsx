@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, Heading, Text, Box, Flex, Button } from '@radix-ui/themes';
 import { Play, FileText, GitBranch, Square, Globe, Plus, LucideIcon } from 'lucide-react';
+import { Node } from '@xyflow/react';
+import { isAddBlockBtnDisabled } from '@/utils/Validation';
 
 /**
  * Represents a workflow block type configuration
@@ -19,6 +21,7 @@ export interface WorkflowBlockConfig {
  */
 export interface BlockPanelProps {
   onAddBlock: (blockType: string) => void;
+  nodes: Node[];
 }
 
 /**
@@ -72,15 +75,16 @@ const WORKFLOW_BLOCKS: readonly BlockConfigWithColor[] = [
  * BlockPanel - Displays available workflow blocks that can be added to the canvas
  * Provides a palette of block types for building workflows
  */
-export const BlockPanel: React.FC<BlockPanelProps> = ({ onAddBlock }) => {
+export const BlockPanel: React.FC<BlockPanelProps> = ({ onAddBlock, nodes }) => {
   return (
-    <Card style={{ width: '256px', height: '100%' }}>
+    <Card style={{ width: '258px', height: '400px' }}>
       <Box p="4" pb="3">
         <Heading size="3">Blocks</Heading>
       </Box>
       <Flex p="4" pt="0" direction="column" gap="3">
         {WORKFLOW_BLOCKS.map((block) => {
           const IconComponent = block.icon;
+          const isDisabled = isAddBlockBtnDisabled(block.id, nodes);
           return (
             <Flex key={block.id} direction="column" gap="1">
               <Text size="1" color="gray">
@@ -89,9 +93,10 @@ export const BlockPanel: React.FC<BlockPanelProps> = ({ onAddBlock }) => {
               <Button
                 variant="solid"
                 color={block.color}
+                disabled={isDisabled}
                 onClick={() => onAddBlock(block.id)}
                 style={{
-                  cursor: 'pointer',
+                  cursor: isDisabled ? 'not-allowed' : 'pointer',
                 }}
               >
                 <Flex align="center" gap="3" width="100%" justify="between">

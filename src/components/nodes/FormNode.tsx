@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import { FileText, X } from 'lucide-react';
 import { Box, Text, Flex, IconButton } from '@radix-ui/themes';
@@ -37,7 +37,7 @@ export interface FormNodeProps {
  * FormNode - Represents a user input form in the workflow
  * Collects data from users through configurable fields
  */
-export const FormNode: React.FC<FormNodeProps> = ({ data, id }) => {
+export const FormNode = memo<FormNodeProps>(({ data, id }) => {
   return (
     <Box
       px="4"
@@ -99,6 +99,9 @@ export const FormNode: React.FC<FormNodeProps> = ({ data, id }) => {
         <Text size="2" weight="bold">
           {data.customName || data.label}
         </Text>
+        <Text size="1" weight="light">
+          ({id})
+        </Text>
       </Flex>
 
       <Text size="1" align="center" style={{ opacity: 0.9 }}>
@@ -119,4 +122,6 @@ export const FormNode: React.FC<FormNodeProps> = ({ data, id }) => {
       />
     </Box>
   );
-};
+});
+
+FormNode.displayName = 'FormNode';

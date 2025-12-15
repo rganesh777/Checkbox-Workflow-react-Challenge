@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import { GitBranch, X } from 'lucide-react';
 import { Box, Text, Flex, IconButton } from '@radix-ui/themes';
@@ -48,7 +48,7 @@ export interface ConditionalNodeProps {
  * ConditionalNode - Represents a decision point in the workflow
  * Evaluates a condition and routes to different paths based on the result
  */
-export const ConditionalNode: React.FC<ConditionalNodeProps> = ({ data, id }) => {
+export const ConditionalNode = memo<ConditionalNodeProps>(({ data, id }) => {
   const trueRoute = data.routes?.find((r) => r.id === 'true') || {
     id: 'true' as const,
     label: 'True',
@@ -119,6 +119,9 @@ export const ConditionalNode: React.FC<ConditionalNodeProps> = ({ data, id }) =>
         <Text size="2" weight="bold">
           {data.customName || data.label}
         </Text>
+        <Text size="1" weight="light">
+          ({id})
+        </Text>
       </Flex>
 
       <Text size="1" align="center" mb="2" style={{ opacity: 0.9 }}>
@@ -159,4 +162,6 @@ export const ConditionalNode: React.FC<ConditionalNodeProps> = ({ data, id }) =>
       />
     </Box>
   );
-};
+});
+
+ConditionalNode.displayName = 'ConditionalNode';

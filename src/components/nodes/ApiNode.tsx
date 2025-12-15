@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import { Globe, X } from 'lucide-react';
 import { Box, Text, Flex, IconButton } from '@radix-ui/themes';
@@ -32,7 +32,7 @@ export interface ApiNodeProps {
  * ApiNode - Represents an HTTP API call in the workflow
  * Makes external API requests and processes responses
  */
-export const ApiNode: React.FC<ApiNodeProps> = ({ data, id }) => {
+export const ApiNode = memo<ApiNodeProps>(({ data, id }) => {
   return (
     <Box
       px="4"
@@ -94,6 +94,9 @@ export const ApiNode: React.FC<ApiNodeProps> = ({ data, id }) => {
         <Text size="2" weight="bold">
           {data.label}
         </Text>
+        <Text size="1" weight="light">
+          ({id})
+        </Text>
       </Flex>
 
       <Text size="1" align="center" style={{ opacity: 0.9 }}>
@@ -112,4 +115,6 @@ export const ApiNode: React.FC<ApiNodeProps> = ({ data, id }) => {
       />
     </Box>
   );
-};
+});
+
+ApiNode.displayName = 'ApiNode';

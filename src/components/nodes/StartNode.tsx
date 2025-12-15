@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import { Play, X } from 'lucide-react';
 import { Box, Text, Flex, IconButton } from '@radix-ui/themes';
@@ -23,7 +23,7 @@ export interface StartNodeProps {
  * StartNode - Represents the starting point of a workflow
  * This node is the entry point and has only an output connection
  */
-export const StartNode: React.FC<StartNodeProps> = ({ data, id }) => {
+export const StartNode = memo<StartNodeProps>(({ data, id }) => {
   return (
     <Box
       px="4"
@@ -73,6 +73,9 @@ export const StartNode: React.FC<StartNodeProps> = ({ data, id }) => {
         <Text size="2" weight="bold">
           {data.label}
         </Text>
+        <Text size="1" weight="light">
+          ({id})
+        </Text>
       </Flex>
 
       <Handle
@@ -87,4 +90,6 @@ export const StartNode: React.FC<StartNodeProps> = ({ data, id }) => {
       />
     </Box>
   );
-};
+});
+
+StartNode.displayName = 'StartNode';

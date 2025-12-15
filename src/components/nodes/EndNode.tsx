@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import { Square, X } from 'lucide-react';
 import { Box, Text, Flex, IconButton } from '@radix-ui/themes';
@@ -23,7 +23,7 @@ export interface EndNodeProps {
  * EndNode - Represents the termination point of a workflow
  * This node marks the end of the workflow and has only an input connection
  */
-export const EndNode: React.FC<EndNodeProps> = ({ data, id }) => {
+export const EndNode = memo<EndNodeProps>(({ data, id }) => {
   return (
     <Box
       px="4"
@@ -85,7 +85,12 @@ export const EndNode: React.FC<EndNodeProps> = ({ data, id }) => {
         <Text size="2" weight="bold">
           {data.label}
         </Text>
+        <Text size="1" weight="light">
+          ({id})
+        </Text>
       </Flex>
     </Box>
   );
-};
+});
+
+EndNode.displayName = 'EndNode';
