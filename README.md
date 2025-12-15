@@ -34,4 +34,4 @@ npm run dev
 - Field name autocomplete for conditional nodes
   - All saved fields.
 
-- Unit tests for Components. Needs to write tests for all Components.
+- Unit tests done for all newly created Components. Need to write tests for all Components.
